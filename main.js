@@ -48,11 +48,27 @@ function getLegacyTitleFromQuery() {
   return "";
 }
 
+function getHashParams() {
+  const hash = window.location.hash.startsWith("#")
+    ? window.location.hash.slice(1)
+    : window.location.hash;
+  return new URLSearchParams(hash);
+}
+
 async function getCelebrationContentFromQuery() {
+  const hashParams = getHashParams();
+  const packedFromHash = getFirstNonEmptyParam(hashParams, ["p", "payload"]);
+  if (packedFromHash) {
+    const decoded = await decodeSharePayload(packedFromHash);
+    if (decoded && (decoded.title || decoded.desc)) {
+      return decoded;
+    }
+  }
+
   const params = new URLSearchParams(window.location.search);
-  const packedPayload = getFirstNonEmptyParam(params, ["p", "payload"]);
-  if (packedPayload) {
-    const decoded = await decodeSharePayload(packedPayload);
+  const packedFromQuery = getFirstNonEmptyParam(params, ["p", "payload"]);
+  if (packedFromQuery) {
+    const decoded = await decodeSharePayload(packedFromQuery);
     if (decoded && (decoded.title || decoded.desc)) {
       return decoded;
     }
@@ -71,9 +87,9 @@ async function buildShareUrl(title, desc) {
   const current = new URL(window.location.href);
   current.search = "";
   current.hash = "";
-  const params = new URLSearchParams();
-  params.set("p", await encodeSharePayload({ title, desc }));
-  current.search = params.toString();
+  const hashParams = new URLSearchParams();
+  hashParams.set("p", await encodeSharePayload({ title, desc }));
+  current.hash = hashParams.toString();
   return current.toString();
 }
 
