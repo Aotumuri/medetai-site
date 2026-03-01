@@ -21,43 +21,6 @@
   </head>
   <body>
     <main id="app">
-      <section id="launcher" class="screen">
-        <div class="panel">
-          <p class="eyebrow">誰かを祝いたい人向け</p>
-          <h1>めでたいURLを作る</h1>
-          <p class="description">
-            タイトルと説明を入れると、内容を圧縮した共有URL（#以降）を作成します。
-            そのURLを開くと全画面でお祝い表示になります。
-          </p>
-
-          <label class="label" for="titleInput">お祝いタイトル</label>
-          <textarea
-            id="titleInput"
-            rows="2"
-            maxlength="140"
-            placeholder="例: 昇進おめでとう！！"
-          ></textarea>
-
-          <label class="label" for="descInput">お祝い説明</label>
-          <textarea
-            id="descInput"
-            rows="2"
-            maxlength="180"
-            placeholder="例: すてきな日を、めいっぱい祝おう。"
-          ></textarea>
-
-          <button id="buildButton" class="button primary">お祝いURLを作る</button>
-
-          <div class="urlRow">
-            <input id="shareUrl" type="text" readonly placeholder="ここにURLが出ます" />
-            <button id="copyButton" class="button">コピー</button>
-          </div>
-          <a id="previewLink" class="button ghost" href="#" target="_blank" rel="noreferrer"
-            >別タブで確認</a
-          >
-        </div>
-      </section>
-
       <section id="celebration" class="screen hidden" aria-live="polite">
         <div id="confettiLayer" aria-hidden="true"></div>
         <div class="celebrationContent">

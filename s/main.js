@@ -1,6 +1,5 @@
 import { DEFAULT_DESC, DEFAULT_TITLE, getCelebrationContentFromLocation } from "../shared.js";
 
-const launcher = document.getElementById("launcher");
 const celebration = document.getElementById("celebration");
 const celebrationMessage = document.getElementById("celebrationMessage");
 const celebrationDescription = document.getElementById("celebrationDescription");
@@ -32,7 +31,6 @@ function fillConfetti(count) {
 }
 
 function setCelebrationMode(title, desc) {
-  launcher.classList.add("hidden");
   celebration.classList.remove("hidden");
   celebrationMessage.textContent = title || DEFAULT_TITLE;
   celebrationDescription.textContent = desc || DEFAULT_DESC;
