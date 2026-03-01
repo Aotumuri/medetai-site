@@ -1,0 +1,243 @@
+:root {
+  --bg-a: #ff7f50;
+  --bg-b: #ffd166;
+  --bg-c: #06d6a0;
+  --bg-d: #118ab2;
+  --text-main: #fcfcff;
+  --text-dark: #1d1d2a;
+  --panel-bg: rgba(15, 20, 48, 0.74);
+  --panel-border: rgba(255, 255, 255, 0.28);
+  --accent: #ffec99;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.45), transparent 35%),
+    linear-gradient(125deg, var(--bg-a), var(--bg-b), var(--bg-c), var(--bg-d));
+  background-size: 130% 130%;
+  animation: wave 12s ease-in-out infinite alternate;
+}
+
+body.is-celebrating {
+  touch-action: none;
+}
+
+@keyframes wave {
+  from {
+    background-position: 0% 30%;
+  }
+  to {
+    background-position: 100% 70%;
+  }
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+.panel {
+  width: min(760px, 100%);
+  padding: 28px;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px rgba(16, 10, 42, 0.35);
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: "Yusei Magic", "M PLUS Rounded 1c", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  margin-top: 8px;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+}
+
+h2 {
+  font-size: clamp(2.2rem, 7vw, 5.8rem);
+  text-align: center;
+  text-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.eyebrow {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.description {
+  margin: 14px 0 20px;
+  line-height: 1.6;
+}
+
+.label {
+  display: inline-block;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--text-main);
+  padding: 10px 12px;
+  font: inherit;
+}
+
+textarea::placeholder,
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 84px;
+  max-height: 160px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: var(--text-main);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.18);
+  min-height: 42px;
+  padding: 0 16px;
+  margin-top: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.16s ease, background-color 0.16s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.button.primary {
+  background: rgba(255, 236, 153, 0.25);
+  border-color: rgba(255, 236, 153, 0.6);
+}
+
+.button.ghost {
+  width: fit-content;
+}
+
+.urlRow {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+#celebration {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+}
+
+.celebrationContent {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 95%);
+}
+
+#celebration .description,
+#celebration .eyebrow {
+  text-align: center;
+}
+
+#confettiLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.confetti {
+  position: absolute;
+  top: -12%;
+  left: calc(var(--left) * 1%);
+  width: calc(var(--size) * 1px);
+  height: calc(var(--size) * 0.48px);
+  border-radius: 999px;
+  opacity: 0.9;
+  background: hsl(var(--hue) 95% 68%);
+  transform: rotate(calc(var(--spin) * 1deg));
+  animation: fall linear infinite;
+  animation-duration: calc(var(--duration) * 1s);
+  animation-delay: calc(var(--delay) * 1s);
+}
+
+.confetti.star {
+  width: calc(var(--size) * 0.95px);
+  height: calc(var(--size) * 0.95px);
+  border-radius: 4px;
+  transform: rotate(calc(var(--spin) * 1deg));
+}
+
+@keyframes fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(calc(var(--spin) * 1deg));
+  }
+  100% {
+    transform: translate3d(calc(var(--drift) * 1px), 120vh, 0) rotate(calc((var(--spin) + 400) * 1deg));
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .description {
+    margin-bottom: 14px;
+  }
+
+  textarea {
+    min-height: 74px;
+  }
+}
